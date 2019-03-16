@@ -33,9 +33,13 @@ namespace NA_laba2
 
                 b[i] = A[i, i];
             }
-            //Matrix.Output(A1, n, n);
+            //  Matrix.Output(A1, n, n);
+
+            //Console.WriteLine("Vector a ");
             //Matrix.Output(a, n);
+            //Console.WriteLine("Vector b");
             //Matrix.Output(b, n);
+            //Console.WriteLine("Vector c ");
             //Matrix.Output(c, n);
 
             double[] alfa = new double[n];
@@ -48,9 +52,9 @@ namespace NA_laba2
                 alfa[i] = -(c[i] / (a[i] * alfa[i - 1] + b[i]));
                 beta[i] = (d[i] - a[i] * beta[i - 1]) / (a[i] * alfa[i - 1] + b[i]);
             }
-            Console.WriteLine("-----alfa--------");
+            Console.WriteLine("alfa");
             Matrix.Output(alfa, n);
-            Console.WriteLine("-----beta--------");
+            Console.WriteLine("beta");
             Matrix.Output(beta, n);
 
             double[] x = new double[n];
@@ -59,10 +63,10 @@ namespace NA_laba2
             {
                 x[i] = alfa[i] * x[i + 1] + beta[i];
             }
-            Console.WriteLine("-----X--------");
+            Console.WriteLine("Vector X");
             Matrix.Output(x, n);
 
-            Console.WriteLine("-----Error-------");
+            Console.WriteLine("Error");
             Matrix.Error(d, Matrix.MulMatrix(A1, x, n, n), n);
 
             Console.ReadLine();

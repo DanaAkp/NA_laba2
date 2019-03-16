@@ -19,7 +19,7 @@ namespace NA_laba2
             for(int i = 0; i < n; i++)
             {
                 for(int j=0;j<m;j++)
-                    Console.Write(A[i,j]+" ");
+                    Console.Write(string.Format("{0:F2} ", A[i,j]));
                 Console.WriteLine();
             }
             Console.WriteLine("----------------------------------------------------------");
@@ -33,7 +33,7 @@ namespace NA_laba2
         {
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine(A[i]);
+                Console.WriteLine(string.Format("{0:F2} ",A[i]));
             }
             Console.WriteLine("----------------------------------------------------------");
         }
@@ -87,13 +87,13 @@ namespace NA_laba2
          /// <param name="A"></param>
          /// <param name="n"></param>
          /// <param name="b"></param>
-        public static void Error(double[,] A, int n, double b)
+        public static void Error(double[,] A,double[,] A_1, int n)
         {
+            double[,] sub = new double[n, n];
+            for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) sub[i, j] = Math.Abs(A[i, j] - A_1[i, j]);
             double myB = average(A, n);
-            Console.WriteLine(" B = " + b);
-            Console.WriteLine("new B = " + myB);
-            Console.WriteLine("inccuracy = " + Math.Abs(b - myB) / b);
-            // Console.WriteLine("inccuracy = " + Math.Abs(b - myB) / myB);
+            double b = average(sub, n);
+            Console.WriteLine("inccuracy = " + b / myB);
             Console.WriteLine("------------------------------------------------------------------");
         }
         /// <summary>
@@ -104,10 +104,11 @@ namespace NA_laba2
         /// <param name="n"></param>
         public static void Error(double[] B, double[] B_1, int n)
         {
+            double[] sub = new double[n];
+            for (int i = 0; i < n; i++) sub[i] = Math.Abs(B[i] - B_1[i]);
             double b = average(B, n);
-            double new_b = average(B_1, n);
-            double incur = Math.Abs(b - new_b) / b;
-            Console.WriteLine("inccuracy = " + incur);
+            double new_b = average(sub, n);
+            Console.WriteLine("inccuracy = " + new_b / b);
         }
         /// <summary>
         /// Среднее квадратичное вектора
@@ -139,7 +140,8 @@ namespace NA_laba2
 
             delta = Math.Sqrt(delta);
             return delta;
-        } /// <summary>
+        } 
+        /// <summary>
           /// Из квадратной матрицы А получаем прямоугольную путем добавления столбца В
           /// </summary>
           /// <param name="A"></param>
